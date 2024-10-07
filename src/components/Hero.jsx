@@ -1,11 +1,15 @@
 import React from "react";
+import Image from "next/image";
 
 const Hero = () => {
   return (
     <div className="hero bg-secondary min-h-screen ">
       <div className="hero-content flex-col lg:flex-row gap-20">
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+        <Image
+          src="/portfoliopic.jpg"
+          width={500}
+          height={500}
+          alt="portfolio picture"
           className="max-w-sm rounded-full shadow-2xl"
         />
         <div className=" flex flex-col items-center gap-4">
