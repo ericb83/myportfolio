@@ -22,7 +22,12 @@ export default function Home() {
                 image: "/edenrestored.png?height=100&width=200",
                 url: "https://www.edenrestoredhealthmarket.com/",
               },
-              {},
+              {
+                title: "Kittenz",
+                description: "A cat themed memory game.",
+                image: "/kittenzapp.png?height=100&width=200",
+                url: "https://kittenz-seven.vercel.app/",
+              },
             ].map((project, index) => (
               <div
                 key={index}
@@ -55,6 +60,39 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Education Section */}
+        <section id="education" className="py-12 ">
+          <h2 className="text-4xl font-bold text-center mb-8">Education</h2>
+          <div className="space-y-6">
+            <div className="card bg-base-100 shadow-xl rounded-xl">
+              <div className="card-body">
+                <h2 className="card-title">
+                  Bachelor of Science in Information Technology
+                </h2>
+                <p className="text-sm opacity-70">
+                  University of Phoenix, Graduated- May 2024
+                </p>
+              </div>
+            </div>
+            <div className="card bg-base-100 shadow-xl rounded-xl">
+              <div className="card-body">
+                <h2 className="card-title">CodeNoobs Web Dev Incubator</h2>
+                <p className="text-sm opacity-70">April 2024 - Current</p>
+                <p>
+                  A developer mentorship program with a focus on developing real
+                  world world projects and collaboration with a team of
+                  developers.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Me Section */}
+        <section id="contact" className="py-12">
+          <h2 className="text-4xl font-bold text-center mb-8">Contact Me</h2>
         </section>
       </main>
     </div>
