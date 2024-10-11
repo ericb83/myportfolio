@@ -24,10 +24,15 @@ const Hero = () => {
           </h1>
           <h3 className="text-xl p-6 text-center"> Web Developer</h3>
           <p className="py-6">
-            I'm a passionate web developer with a keen eye for design and a love
-            for creating intuitive, user-friendly websites. With expertise in
-            React, Node.js, and modern web technologies, I bring ideas to life
-            through clean, efficient code.
+            Welcome to My Web Development Portfolio! I’m Eric Boerschinger, a
+            passionate web developer with experience in building dynamic,
+            user-focused web applications. My expertise includes modern
+            frameworks like Next.js and Tailwind CSS enabling me to create fast,
+            responsive websites and applications. This portfolio highlights my
+            work. Whether you're looking for freelance web development services
+            or collaborative projects, I bring a combination of creativity,
+            clean code, and dedication to every project. Let’s build something
+            great together
           </p>
           <div className="flex justify-center space-x-4">
             <Link

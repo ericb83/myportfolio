@@ -37,9 +37,7 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
-      <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Eric Boerschinger</a>
-      </div>
+
       <div className="navbar-end">
         <label className="swap swap-rotate">
           {/* this hidden checkbox controls the state */}
