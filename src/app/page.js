@@ -1,10 +1,61 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "@/components/Hero";
 import Image from "next/image";
 import Link from "next/link";
+import { db } from "@/lib/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Home() {
+  const [formKey, setFormKey] = useState(0);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [formStatus, setFormStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setFormStatus("Sending...");
+    console.log("Form data:", formData);
+
+    try {
+      const docRef = await addDoc(collection(db, "messages"), {
+        ...formData,
+        createdAt: new Date(),
+      });
+      console.log("Document written with ID:", docRef.id);
+      setFormStatus("Message sent successfully!");
+      setFormKey((prevKey) => prevKey + 1); // Force re-render of the form
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error sending message: ", error);
+      setFormStatus(`Failed to send message. ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  useEffect(() => {
+    if (formStatus === "Message sent successfully!") {
+      const timer = setTimeout(() => {
+        setFormStatus("");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [formStatus]);
+
   return (
     <div className=" min-h-screen bg-secondary">
       <main className="container mx-auto px-4 py-8">
@@ -85,8 +136,7 @@ export default function Home() {
                 <p className="text-sm opacity-70">April 2024 - Current</p>
                 <p>
                   A developer mentorship program with a focus on developing real
-                  world world projects and collaboration with a team of
-                  developers.
+                  world projects and collaboration with a team of developers.
                 </p>
               </div>
             </div>
@@ -98,18 +148,19 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-8">Contact Me</h2>
           <div className="card bg-base-100 shadow-xl max-w-md mx-auto rounded-xl">
             <div className="card-body">
-              <h3 className="text-xl font-bold mb-4">Get in touch</h3>
               <p className="mb-4">
                 Fill out the form below to send me a message.
               </p>
-              <form className="space-y-4">
+              <form key={formKey} onSubmit={handleSubmit} className="space-y-4">
                 <div className="form-control">
                   <label className="label" htmlFor="name">
                     <span className="label-text">Name</span>
                   </label>
                   <input
+                    onChange={handleInputChange}
                     type="text"
                     id="name"
+                    name="name"
                     placeholder="Your name"
                     className="input input-bordered rounded-xl"
                     required
@@ -120,10 +171,13 @@ export default function Home() {
                     <span className="label-text">Email</span>
                   </label>
                   <input
+                    onChange={handleInputChange}
                     type="email"
                     id="email"
+                    name="email"
                     placeholder="Your email"
                     className="input input-bordered rounded-xl"
+                    autoComplete="on"
                     required
                   />
                 </div>
@@ -132,7 +186,9 @@ export default function Home() {
                     <span className="label-text">Message</span>
                   </label>
                   <textarea
+                    onChange={handleInputChange}
                     id="message"
+                    name="message"
                     placeholder="Your message"
                     className="textarea textarea-bordered rounded-xl"
                     required
@@ -141,10 +197,30 @@ export default function Home() {
                 <button
                   type="submit"
                   className="btn btn-primary w-full rounded-xl"
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
+                {formStatus && (
+                  <p className="text-center mt-4 text-primary">{formStatus}</p>
+                )}
               </form>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonial Section */}
+        <section>
+          <h2 className="text-4xl font-bold text-center mb-8">
+            What Clients Have To Say
+          </h2>
+          <div className="card bg-base-100 shadow-xl max-w-md mx-auto rounded-xl">
+            <div className="card-body">
+              <p className=" font-xl text-center mb-4">
+                If you’re looking for someone who combines skill, efficiency,
+                and a personable approach, we highly recommend Eric. --Eden
+                Restored
+              </p>
             </div>
           </div>
         </section>

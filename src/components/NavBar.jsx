@@ -43,6 +43,7 @@ const NavBar = () => {
           {/* this hidden checkbox controls the state */}
           <input
             type="checkbox"
+            id="themeController"
             className="theme-controller"
             value="business"
           />
