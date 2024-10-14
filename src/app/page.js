@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaNodeJs } from "react-icons/fa";
+import { SiTailwindcss, SiFirebase, SiNextdotjs } from "react-icons/si";
 import Hero from "@/components/Hero";
 import Image from "next/image";
 import Link from "next/link";
@@ -111,6 +113,28 @@ export default function Home() {
                     )}
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Tech Stack Section */}
+        <section id="tech-stack" className="py-12">
+          <h2 className="text-4xl font-bold text-center mb-8">Tech Stack</h2>
+          <div className="flex flex-wrap justify-center gap-8">
+            {[
+              { icon: FaReact, name: "React" },
+              { icon: FaHtml5, name: "HTML5" },
+              { icon: FaCss3Alt, name: "CSS3" },
+              { icon: FaJs, name: "JavaScript" },
+              { icon: FaNodeJs, name: "Node.js" },
+              { icon: SiTailwindcss, name: "Tailwind CSS" },
+              { icon: SiFirebase, name: "Firebase" },
+              { icon: SiNextdotjs, name: "Next.js" },
+            ].map((tech, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <tech.icon className="text-6xl mb-2" />
+                <span className="text-sm">{tech.name}</span>
               </div>
             ))}
           </div>
