@@ -60,7 +60,7 @@ export default function Home() {
 
   return (
     <div className=" min-h-screen bg-secondary">
-      <main className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8">
         <Hero />
 
         {/* Projects Section */}
@@ -248,7 +248,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }
