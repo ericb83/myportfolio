@@ -91,7 +91,7 @@ export default function Home() {
                     src={project.image}
                     alt={project.title}
                     width={200}
-                    height={90}
+                    height={100}
                     className="w-full h-full rounded-xl"
                   />
                 </figure>

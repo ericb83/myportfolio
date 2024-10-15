@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
@@ -13,8 +14,8 @@ const Hero = () => {
       <div className="hero-content flex-col lg:flex-row gap-20">
         <Image
           src="/portfoliopic.jpg"
-          width={500}
-          height={500}
+          width={400}
+          height={400}
           alt="portfolio picture"
           className="max-w-sm rounded-full shadow-2xl"
         />
