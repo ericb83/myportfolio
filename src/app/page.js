@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaNodeJs } from "react-icons/fa";
 import { SiTailwindcss, SiFirebase, SiNextdotjs } from "react-icons/si";
 import Hero from "@/components/Hero";
@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { db } from "@/lib/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import dynamic from "next/dynamic";
 
 export default function Home() {
   const [formKey, setFormKey] = useState(0);
@@ -26,6 +27,8 @@ export default function Home() {
     }));
   };
 
+  const formRef = useRef(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -33,21 +36,30 @@ export default function Home() {
     console.log("Form data:", formData);
 
     try {
-      const docRef = await addDoc(collection(db, "messages"), {
+      await addDoc(collection(db, "messages"), {
         ...formData,
         createdAt: new Date(),
       });
-      console.log("Document written with ID:", docRef.id);
       setFormStatus("Message sent successfully!");
-      setFormKey((prevKey) => prevKey + 1); // Force re-render of the form
+      formRef.current.reset();
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("Error sending message: ", error);
-      setFormStatus(`Failed to send message. ${error.message}`);
+      setFormStatus("Failed to send message. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  // In the JSX
+  <form
+    ref={formRef}
+    onSubmit={handleSubmit}
+    className="space-y-4"
+    aria-label="Contact form"
+  >
+    {/* Form fields */}
+  </form>;
 
   useEffect(() => {
     if (formStatus === "Message sent successfully!") {
@@ -72,13 +84,13 @@ export default function Home() {
                 title: "Wix Website",
                 description:
                   "A website for a local non-profit using Wix Studio",
-                image: "/edenrestored.png?height=100&width=200",
+                image: "/edenrestored.png",
                 url: "https://www.edenrestoredhealthmarket.com/",
               },
               {
                 title: "Kittenz",
                 description: "A cat themed memory game.",
-                image: "/kittenzapp.png?height=100&width=200",
+                image: "/kittenzapp.png",
                 url: "https://kittenz-seven.vercel.app/",
               },
             ].map((project, index) => (
