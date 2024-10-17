@@ -41,7 +41,7 @@ export default function Home() {
         createdAt: new Date(),
       });
       setFormStatus("Message sent successfully!");
-      formRef.current.reset();
+
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("Error sending message: ", error);
@@ -51,13 +51,7 @@ export default function Home() {
     }
   };
 
-  // In the JSX
-  <form
-    ref={formRef}
-    onSubmit={handleSubmit}
-    className="space-y-4"
-    aria-label="Contact form"
-  >
+  <form onSubmit={handleSubmit} className="space-y-4" aria-label="Contact form">
     {/* Form fields */}
   </form>;
 
