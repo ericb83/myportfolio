@@ -5,9 +5,8 @@ import { SiTailwindcss, SiFirebase, SiNextdotjs } from "react-icons/si";
 import Hero from "@/components/Hero";
 import Image from "next/image";
 import Link from "next/link";
-import { db } from "@/lib/firebase";
+import { db } from "@/lib/firebase.config";
 import { collection, addDoc } from "firebase/firestore";
-import dynamic from "next/dynamic";
 
 export default function Home() {
   const [formKey, setFormKey] = useState(0);
